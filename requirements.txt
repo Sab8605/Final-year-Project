@@ -77,6 +77,6 @@ urllib3==1.26.14
 validators==0.20.0
 watchdog==2.3.1
 zipp==3.15.0
-opencv-python==4.7.0.72
+opencv-python-headless
 opengl==0.0.1
 
