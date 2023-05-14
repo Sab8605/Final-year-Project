@@ -58,7 +58,7 @@ def login():
                 if user_data["email"] == email and user_data["password"] == password:
                     # st.success("Login successful!")
                     # st.write(f"Welcome back, {user_data['name']}!")
-                    switch_page("try2")
+                    switch_page("test")
 #                         cap = cv2.VideoCapture(0)
 
 # # Define Streamlit app
