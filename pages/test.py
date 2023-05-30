@@ -6,6 +6,7 @@ import torchvision.transforms as transforms
 from PIL import Image
 import time
 import pygame
+from pygame import mixer as pyg_mixer
 
 # Load pre-trained model
 model_best = torch.jit.load('model_best1510.pt', map_location=torch.device('cpu'))
@@ -36,7 +37,7 @@ st.title('Distracted Driver Detection')
 st.write('Click the button below to start capturing images from your camera')
 
 # pygame.mixer.init() # initialize pygame mixer
-pygame.mixer.init(44100, -16,2,2048)
+pygame.mixer.init()
 
 alarm_sound = pygame.mixer.Sound('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
 
