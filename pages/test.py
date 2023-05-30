@@ -35,7 +35,9 @@ cap = cv2.VideoCapture(0)
 st.title('Distracted Driver Detection')
 st.write('Click the button below to start capturing images from your camera')
 
-pygame.mixer.init() # initialize pygame mixer
+# pygame.mixer.init() # initialize pygame mixer
+pygame.mixer.init(44100, -16,2,2048)
+
 alarm_sound = pygame.mixer.Sound('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
 
 if st.button('Capture'):
