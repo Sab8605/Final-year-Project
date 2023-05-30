@@ -6,7 +6,7 @@ import torchvision.transforms as transforms
 from PIL import Image
 import time
 import pygame
-from pygame import mixer 
+from pygame import mixer as pyg_mixer
 
 # Load pre-trained model
 model_best = torch.jit.load('model_best1510.pt', map_location=torch.device('cpu'))
@@ -35,12 +35,12 @@ cap = cv2.VideoCapture(0)
 # Define Streamlit app
 st.title('Distracted Driver Detection')
 st.write('Click the button below to start capturing images from your camera')
-
+pygame.init()
 # pygame.mixer.init() # initialize pygame mixer
-pygame.mixer.init()
+pyg_mixer.init()
 # pyg_mixer.init()
 
-alarm_sound = pygame.mixer.Sound('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
+alarm_sound = pyg_mixer.Sound('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
 
 if st.button('Capture'):
     # Create a frame for displaying the video stream
