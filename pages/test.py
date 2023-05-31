@@ -1,3 +1,4 @@
+
 import streamlit as st
 import cv2
 import numpy as np
@@ -6,7 +7,6 @@ import torchvision.transforms as transforms
 from PIL import Image
 import time
 import pygame
-from pygame import mixer as pyg_mixer
 
 # Load pre-trained model
 model_best = torch.jit.load('model_best1510.pt', map_location=torch.device('cpu'))
@@ -33,14 +33,11 @@ def predict(image):
 cap = cv2.VideoCapture(0)
 
 # Define Streamlit app
-st.title('Distracted Driver Detection')
+st.title('Live Camera Image Classification')
 st.write('Click the button below to start capturing images from your camera')
-pygame.init()
-# pygame.mixer.init() # initialize pygame mixer
-# mixer.init()
-pyg_mixer.init()
 
-alarm_sound = pygame.pyg_mixer.Sound('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
+pygame.mixer.init() # initialize pygame mixer
+alarm_sound = pygame.mixer.Sound('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
 
 if st.button('Capture'):
     # Create a frame for displaying the video stream
@@ -57,11 +54,12 @@ if st.button('Capture'):
             frame = cv2.resize(frame, (500, 500)) # resize for display
             # Display the video stream and predicted class with highest confidence in the frame
             video_frame.image(frame, caption=f'Predicted class: {predicted_class}, Confidence: {confidence:.2f}') 
-            
+
             # Check if activity is detected
             if predicted_class in ['Drinking', 'Smoking', 'Talking on Phone'] and not alarm_triggered:
-                if time.time() - start_time >= 2: # wait for 5 seconds
-                    alarm_sound.play() # play alarm sound
+                if time.time() - start_time >= 5: # wait for 5 seconds
+                    pygame.mixer.music.load('198841__bone666138__analog-alarm-clock.wav') # load alarm sound
+                    pygame.mixer.music.play() # play alarm sound
                     alarm_triggered = True # set alarm triggered flag
             else:
                 start_time = time.time() # reset start time
